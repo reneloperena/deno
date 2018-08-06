@@ -3,20 +3,11 @@
 import { Console } from "./console";
 
 declare global {
-  type MessageCallback = (msg: Uint8Array) => void;
-
-  interface Deno {
-    print(text: string): void;
-    recv(cb: MessageCallback): void;
-    send(msg: ArrayBufferView): Uint8Array | null;
-  }
-
   interface Window {
     console: Console;
   }
 
   const console: Console;
-  const deno: Readonly<Deno>;
   const window: Window;
 }
 
@@ -31,6 +22,16 @@ export const globalEval = eval;
 // TODO The underscore is because it's conflicting with @types/node.
 export const window = globalEval("this");
 
+// The built-in libdeno functions are moved out of the global variable.
+type MessageCallback = (msg: Uint8Array) => void;
+interface Libdeno {
+  recv(cb: MessageCallback): void;
+  send(msg: ArrayBufferView): null | Uint8Array;
+  print(x: string): void;
+}
+export const libdeno = window["libdeno"] as Libdeno;
+window["libdeno"] = null;
+
 window["window"] = window; // Create a window object.
 // import "./url";
 
@@ -40,7 +41,7 @@ window["window"] = window; // Create a window object.
 // window["clearTimeout"] = timer.clearTimer;
 // window["clearInterval"] = timer.clearTimer;
 
-window["console"] = new Console();
+window["console"] = new Console(libdeno.print);
 
 // import { fetch } from "./fetch";
 // window["fetch"] = fetch;

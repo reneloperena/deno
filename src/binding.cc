@@ -278,7 +278,7 @@ void InitializeContext(v8::Isolate* isolate, v8::Local<v8::Context> context,
   auto global = context->Global();
 
   auto deno_val = v8::Object::New(isolate);
-  CHECK(global->Set(context, deno::v8_str("deno"), deno_val).FromJust());
+  CHECK(global->Set(context, deno::v8_str("libdeno"), deno_val).FromJust());
 
   auto print_tmpl = v8::FunctionTemplate::New(isolate, Print);
   auto print_val = print_tmpl->GetFunction(context).ToLocalChecked();

@@ -14,7 +14,7 @@ import { assetSourceCode } from "./assets";
 import * as os from "./os";
 import * as sourceMaps from "./v8_source_maps";
 import { window, globalEval } from "./globals";
-//import * as deno from "./deno";
+import * as deno from "./deno";
 
 const EOL = "\n";
 const ASSETS = "/$asset$/";
