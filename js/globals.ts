@@ -1,15 +1,7 @@
 // Copyright 2018 the Deno authors. All rights reserved. MIT license.
-
+/// <reference lib="dom" />
 import { Console } from "./console";
-
-declare global {
-  interface Window {
-    console: Console;
-  }
-
-  const console: Console;
-  const window: Window;
-}
+import { TextEncoder, TextDecoder } from "text-encoding";
 
 // If you use the eval function indirectly, by invoking it via a reference
 // other than eval, as of ECMAScript 5 it works in the global scope rather than
@@ -41,11 +33,9 @@ window["window"] = window; // Create a window object.
 // window["clearTimeout"] = timer.clearTimer;
 // window["clearInterval"] = timer.clearTimer;
 
-window["console"] = new Console(libdeno.print);
+window.console = new Console(libdeno.print);
+window.TextEncoder = TextEncoder;
+window.TextDecoder = TextDecoder;
 
 // import { fetch } from "./fetch";
 // window["fetch"] = fetch;
-
-// import { TextEncoder, TextDecoder } from "text-encoding";
-// window["TextEncoder"] = TextEncoder;
-// window["TextDecoder"] = TextDecoder;

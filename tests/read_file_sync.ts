@@ -9,7 +9,9 @@ if (!data.byteLength) {
     `Expected positive value for data.byteLength ${data.byteLength}`
   );
 }
-const pkg = JSON.parse(String.fromCharCode(...data));
+const decoder = new TextDecoder("utf-8");
+const json = decoder.decode(data);
+const pkg = JSON.parse(json);
 if (pkg['devDependencies'] == null) {
   throw Error("Expected a positive number of devDependencies");
 }

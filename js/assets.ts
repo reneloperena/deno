@@ -14,6 +14,7 @@ import osDts from "gen/js/os.d.ts!string";
 import utilDts from "gen/js/util.d.ts!string";
 
 // Static libraries
+import libDomDts from "/third_party/node_modules/typescript/lib/lib.dom.d.ts!string";
 import libEs2015Dts from "/third_party/node_modules/typescript/lib/lib.es2015.d.ts!string";
 import libEs2015CollectionDts from "/third_party/node_modules/typescript/lib/lib.es2015.collection.d.ts!string";
 import libEs2015CoreDts from "/third_party/node_modules/typescript/lib/lib.es2015.core.d.ts!string";
@@ -59,6 +60,7 @@ export const assetSourceCode: { [key: string]: string } = {
   "util.d.ts": utilDts,
 
   // Static libraries
+  "lib.dom.d.ts": libDomDts,
   "lib.es2015.collection.d.ts": libEs2015CollectionDts,
   "lib.es2015.core.d.ts": libEs2015CoreDts,
   "lib.es2015.d.ts": libEs2015Dts,
